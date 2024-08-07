@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Login Page</title>
+    <link rel="stylesheet" th:href="@{/css/loginCss.css}">
+</head>
+<body>
+
+<div class="header">
+    <a th:href="@{/}" class="home-button">&larr; Home</a>
+</div>
+
+<div class="login-container">
+    <h2>Login</h2>
+    <form th:action="@{/user/login}" method="post">
+        <div th:if="${error}" class="error-message">
+            <p th:text="${error}"></p>
+        </div>
+        <div class="form-group">
+            <label for="username">Email</label>
+            <input type="text" id="username" name="username" required>
+        </div>
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" required>
+        </div>
+        <div class="role-group">
+            <label>Role</label>
+            <div class="radio-btn">
+                <input type="radio" id="user" name="role" value="USER" checked required>
+                <label for="user">User</label>
+                <input type="radio" id="admin" name="role" value="ADMIN" required>
+                <label for="admin">Admin</label>
+            </div>
+        </div>
+        <div>
+            <button type="submit">Login</button>
+        </div>
+        <div class="additional-links">
+            <a th:href="@{/user/register}">Đăng ký tài khoản</a>
+        </div>
+    </form>
+</div>
+
+</body>
+</html>

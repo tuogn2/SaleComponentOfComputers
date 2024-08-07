@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Chi tiết đơn hàng</title>
+    <link rel="stylesheet" th:href="@{/css/admin.css}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div th:replace="component/headerAdmin :: headerAdmin"></div>
+<div>
+    <div class="d-flex">
+        <div th:replace="component/SitebarAdmin :: SitebarAdmin"></div>
+        <main class="main-content">
+            <h1>Chi tiết đơn hàng</h1>
+            <div>
+                <div class="d-flex flex-wrap justify-content-between mb-3">
+                    <p class="mr-3"><strong>ID:</strong> <span th:text="${order.id}"></span></p>
+                    <p class="mr-3"><strong>Người dùng:</strong> <span th:text="${order.user.name}"></span></p>
+                    <p class="mr-3"><strong>Tổng giá:</strong> <span th:text="${order.totalPrice}"></span></p>
+                    <p class="mr-3"><strong>Trạng thái:</strong> <span th:text="${order.status}"></span></p>
+                    <p><strong>Ngày tạo:</strong> <span th:text="${#dates.format(order.createdAt, 'dd/MM/yyyy')}"></span></p>
+                </div>
+               <h2>Chi tiết sản phẩm</h2>
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>Sản phẩm</th>
+                        <th>Số lượng</th>
+                        <th>Giá</th>
+                        <th>Tổng</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="detail : ${orderDetails}">
+                        <td th:text="${detail.product.name}"></td>
+                        <td th:text="${detail.quantity}"></td>
+                        <td th:text="${detail.price}"></td>
+                        <td th:text="${detail.price * detail.quantity}"></td>
+                    </tr>
+                    </tbody>
+                </table>
+                <a th:href="@{/admin/orders}" class="btn btn-secondary">Quay lại</a>
+            </div>
+        </main>
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

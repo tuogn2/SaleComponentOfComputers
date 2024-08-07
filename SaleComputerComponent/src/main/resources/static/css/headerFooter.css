@@ -1,0 +1,166 @@
+/* Reset some default styles */
+body, h1, ul, li, p {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+/* Base styles */
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+header {
+    background-color: #333;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+}
+
+header .logo h1 {
+    margin: 0;
+}
+
+header nav ul {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1;
+    margin: 0 20px;
+    padding: 0;
+    gap: 15px;
+    height: 50px;
+}
+
+header nav ul li {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    border-radius: 5px;
+    position: relative; /* Thêm vào để chứa vị trí tuyệt đối của categories-menu */
+}
+
+header nav ul li a {
+    color: white;
+    text-decoration: none;
+    transition: background-color 0.3s;
+}
+header nav ul li:hover {
+    background-color: #555;
+    border-radius: 5px;
+}
+
+.logo a {
+    color: white;
+    text-decoration: none;
+}
+
+/* Cập nhật các thuộc tính cho menu và mục menu */
+.dropdown .categories-menu {
+    flex-direction: column;
+    gap: 1px;
+    align-items: stretch; /* Đảm bảo các mục giãn theo chiều ngang */
+    position: absolute;
+    top: 100%;
+    left: -20px;
+    background-color: #555555;
+    padding: 2px;
+    border-radius: 2px;
+    width: 150px;
+    height: auto;
+    display: none;
+}
+
+.dropdown .categories-menu li {
+    width: 100%; /* Đảm bảo chiều ngang của các mục là 100% */
+    margin: 0;
+    padding: 0;
+}
+
+.dropdown .categories-menu a {
+    display: block;
+    text-align: center;
+    border-radius: 5px;
+    padding: 10px 15px; /* Điều chỉnh padding để mục menu có kích thước phù hợp */
+    color: white;
+    text-decoration: none;
+    background-color: #333; /* Màu nền cho các mục menu */
+    transition: background-color 0.3s;
+
+}
+
+.dropdown .categories-menu li a {
+    width: 100%;
+    height: 100%;
+}
+
+.categories-menu li a:hover {
+    background-color: #555;
+}
+
+.dropdown:hover .categories-menu {
+    display: flex;
+}
+
+/*end header*/
+.user-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.user-actions button {
+    background-color: #555;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.user-actions button:hover {
+    background-color: #777;
+}
+
+
+
+
+
+footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    width: 100%;
+    padding: 10px 0;
+    position: relative; /* Đặt position thành relative để có thể xác định vị trí chính xác */
+}
+
+footer .contact-info {
+    margin-bottom: 10px;
+}
+
+footer .footer-links ul {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+footer .footer-links ul li a {
+    color: white;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+footer .footer-links ul li a:hover {
+    color: #ddd;
+}
+
+.footer {
+    margin-top: auto; /* Đẩy footer xuống dưới cùng */
+}

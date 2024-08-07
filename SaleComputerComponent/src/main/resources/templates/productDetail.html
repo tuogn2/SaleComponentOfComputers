@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Chi tiết sản phẩm</title>
+
+    <link rel="stylesheet" th:href="@{/css/headerFooter.css}">
+    <link rel="stylesheet" th:href="@{/css/productDetail.css}">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $(".add-to-cart").click(function() {
+                var productId = $(this).data("id");
+                var quantity = $("#quantity").val(); // Lấy số lượng từ input
+
+                $.ajax({
+                    type: "POST",
+                    url: "/cart/add",
+                    data: {
+                        productId: productId,
+                        quantity: quantity // Gửi số lượng người dùng chọn
+                    },
+                    success: function() {
+                        alert("Sản phẩm đã được thêm vào giỏ hàng!");
+                    },
+                    error: function() {
+                        alert("Có lỗi xảy ra, vui lòng thử lại sau.");
+                    }
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+<!-- Include header fragment -->
+<div th:replace="component/header :: header"></div>
+
+<div class="container">
+    <main class="main-content">
+        <div class="product-detail">
+            <div class="product-image">
+                <img th:src="@{{image}(image=${product.image})}" alt="Product Image">
+            </div>
+            <div class="product-info">
+                <h1 th:text="${product.name}">Tên sản phẩm</h1>
+                <div class="price">
+                    <span th:text="${#numbers.formatDecimal(product.price, 0, 'COMMA', 2, 'POINT')}">₫100.000</span> $
+                </div>
+                <div class="quantity">
+                    Số lượng còn: <span th:text="${product.quantity}">10</span>
+                </div>
+                <div class="quantity-selector">
+                    <label for="quantity">Số lượng muốn mua:</label>
+                    <button type="button" id="decreaseBtn">-</button>
+                    <input type="number" disabled id="quantity" min="1" value="1" th:attr="max=${product.quantity}" />
+                    <button type="button" id="increaseBtn">+</button>
+                </div>
+                <div class="actions">
+                    <button class="add-to-cart" th:attr="data-id=${product.productid}">Thêm Vào Giỏ Hàng</button>
+                </div>
+                <div class="description">
+                    <h3>Mô tả sản phẩm</h3>
+                    <p th:text="${product.description}">Mô tả chi tiết sản phẩm...</p>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+
+<div th:replace="component/footer :: footer" class="footer"></div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+        const quantityInput = document.getElementById('quantity');
+        const decreaseBtn = document.getElementById('decreaseBtn');
+        const increaseBtn = document.getElementById('increaseBtn');
+        const maxQuantity = parseInt(quantityInput.max);
+
+        decreaseBtn.addEventListener('click', () => {
+            let quantity = parseInt(quantityInput.value);
+            if (quantity > 1) {
+                quantityInput.value = quantity - 1;
+            }
+        });
+
+        increaseBtn.addEventListener('click', () => {
+            let quantity = parseInt(quantityInput.value);
+            if (quantity < maxQuantity) {
+                quantityInput.value = quantity + 1;
+            }
+        });
+    });
+</script>
+</body>
+</html>

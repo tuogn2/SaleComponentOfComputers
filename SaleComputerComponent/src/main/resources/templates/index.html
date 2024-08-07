@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Phụ kiện máy tính</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $(".add-to-cart").click(function() {
+                var productId = $(this).data("id");
+                $.ajax({
+                    type: "POST",
+                    url: "/cart/add",
+                    data: {
+                        productId: productId,
+                        quantity: 1 // Số lượng mặc định là 1, bạn có thể cập nhật để cho phép người dùng chọn số lượng
+                    },
+                    success: function() {
+                        alert("Sản phẩm đã được thêm vào giỏ hàng!");
+                    },
+                    error: function() {
+                        alert("Có lỗi xảy ra, vui lòng thử lại sau.");
+                    }
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+<!-- Include header fragment -->
+<div th:replace="component/header :: header"></div>
+
+<div class="container">
+    <main class="main-content">
+        <div>
+            <h2 class="header-product">Danh sách sản phẩm</h2>
+        </div>
+        <div class="product-list">
+            <div th:each="product : ${products}" class="product-item">
+                <img th:src="@{{image}(image=${product.image})}" alt="Product Image" width="100" height="100">
+                <div class="product-info">
+                    <h3 th:text="${product.name}"></h3>
+                    <p>Giá: <span th:text="${product.price}"></span> $</p>
+                    <p>Số lượng còn: <span th:text="${product.quantity}"></span></p>
+                    <div class="product-actions">
+                        <button th:attr="data-id=${product.productid}" class="add-to-cart">Thêm vào giỏ hàng</button>
+                        <a th:href="@{/products/detail/{id}(id=${product.productid})}" class="product-detail">Chi tiết sản phẩm</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pagination -->
+        <div class="pagination">
+            <ul>
+                <li th:if="${currentPage > 1}">
+                    <a th:href="@{/products(page=${currentPage - 1})}">&laquo; Trước</a>
+                </li>
+                <li th:each="i : ${#numbers.sequence(1, totalPages)}">
+                    <a th:href="@{/products(page=${i})}" th:text="${i}" th:classappend="${i == currentPage} ? 'active'"></a>
+                </li>
+                <li th:if="${currentPage < totalPages}">
+                    <a th:href="@{/products(page=${currentPage + 1})}">Tiếp &raquo;</a>
+                </li>
+            </ul>
+        </div>
+    </main>
+</div>
+<div th:replace="component/footer :: footer" class="footer"></div>
+</body>
+</html>

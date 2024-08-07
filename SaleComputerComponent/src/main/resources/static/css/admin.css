@@ -1,0 +1,203 @@
+/* Reset some default styles */
+body, h1, ul, li, p {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+/* Base styles */
+body {
+    font-family: Arial, sans-serif;
+}
+
+header {
+    background-color: #333;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+}
+
+header .logo h1 {
+    margin: 0;
+}
+
+.logo a {
+    color: white;
+    text-decoration: none;
+}
+
+header nav ul {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1;
+    margin: 0 20px;
+    padding: 0;
+    gap: 15px;
+}
+
+header nav ul li a {
+    color: white;
+    text-decoration: none;
+    padding: 10px;
+    transition: background-color 0.3s;
+}
+
+header nav ul li a:hover {
+    background-color: #555;
+}
+
+.user-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.user-actions button {
+    background-color: #555;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.user-actions button:hover {
+    background-color: #777;
+}
+
+.container {
+    display: flex;
+    height: calc(100vh - 160px); /* Adjust based on your header and footer height */
+}
+
+.sidebar {
+    width: 60px;
+    background-color: #333;
+    color: #fff;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px 0;
+}
+
+.sidebar-item {
+    width: 100%;
+    padding: 15px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    position: relative;
+}
+
+.sidebar-item:hover {
+    background-color: #444;
+}
+
+.icon {
+    font-size: 24px;
+    margin-bottom: 5px;
+}
+
+.sidebar-item span {
+    font-size: 12px;
+    display: none; /* Hide text initially */
+}
+
+.sidebar-item:hover span {
+    display: block; /* Show text on hover */
+    position: absolute;
+    left: 70px;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: #444;
+    padding: 5px 10px;
+    border-radius: 4px;
+}
+
+.icon-properties::before {
+    content: '\f013'; /* Example Unicode for an icon */
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 900;
+}
+
+.icon-tree::before {
+    content: '\f0e8';
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 900;
+}
+
+.icon-code::before {
+    content: '\f121';
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 900;
+}
+
+.icon-view::before {
+    content: '\f06e';
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 900;
+}
+
+.icon-export::before {
+    content: '\f093';
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 900;
+}
+
+.icon-diff::before {
+    content: '\f362';
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 900;
+}
+
+.main-content {
+    flex-grow: 1;
+    background-color: #fff;
+    padding: 20px;
+}
+
+footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+}
+
+footer .contact-info {
+    margin-bottom: 10px;
+}
+
+footer .footer-links ul {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+footer .footer-links ul li a {
+    color: white;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+footer .footer-links ul li a:hover {
+    color: #ddd;
+}
+
+
+.svg-icon {
+    width: 24px;
+    height: 24px;
+    fill: white; /* Ensure the SVG inherits this color */
+}
+
+.sidebar-item{
+    color: white;
+    text-decoration: none;
+}

@@ -1,0 +1,30 @@
+<div th:fragment="headerAdmin">
+    <header class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" th:href="@{/admin}">
+            <h1>Admin Page</h1>
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item active">
+                    <a class="nav-link" th:href="@{/}">Trang chủ <span class="sr-only">(current)</span></a>
+                </li>
+            </ul>
+        </div>
+        <div class="user-actions">
+            <!-- Kiểm tra xem có session người dùng hay không -->
+            <div th:if="${session.loggedInUser != null}">
+                <!-- Hiển thị tên người dùng và nút Đăng xuất -->
+                <span th:text="${session.loggedInUser.email}"></span>
+                <a th:href="@{/user/logout}"><button id="logout-btn">Đăng xuất</button></a>
+            </div>
+            <div th:unless="${session.loggedInUser != null}">
+                <!-- Hiển thị nút Đăng nhập và Đăng ký nếu không có session -->
+                <a th:href="@{/user/login}"><button id="btn">Đăng nhập</button></a>
+                <a th:href="@{/user/register}"><button id="register-btn">Đăng ký</button></a>
+            </div>
+        </div>
+    </header>
+</div>

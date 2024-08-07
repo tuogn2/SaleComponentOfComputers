@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Hoàn tất đơn hàng</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="stylesheet" th:href="@{/css/complete.css}">
+</head>
+<body>
+<!-- Include header fragment -->
+<div th:replace="component/header :: header"></div>
+
+<div class="container">
+    <main class="main-content">
+        <h2>Đơn hàng của bạn đã được xử lý thành công!</h2>
+        <p>Cảm ơn bạn đã mua hàng tại cửa hàng của chúng tôi. Đơn hàng của bạn sẽ được gửi đến địa chỉ trong thời gian sớm nhất.</p>
+        <p>Bạn có thể kiểm tra lại thông tin đơn hàng dưới đây:</p>
+
+        <!-- Hiển thị thông tin chi tiết đơn hàng -->
+        <div class="order-details">
+            <h3>Thông tin đơn hàng</h3>
+            <ul>
+                <li><strong>Mã đơn hàng:</strong> #123456</li> <!-- Thay đổi với mã đơn hàng thực tế nếu có -->
+                <li><strong>Ngày đặt hàng:</strong> <!-- Thay đổi với ngày đặt hàng thực tế nếu có -->
+                    <span th:text="${#dates.format(#calendars.createNow(), 'dd/MM/yyyy HH:mm:ss')}"></span>
+                </li>
+                <li><strong>Tổng thanh toán:</strong> <span th:text="${totalPrice}"></span> VNĐ</li> <!-- Thay đổi với tổng thanh toán thực tế -->
+            </ul>
+            <h3>Chi tiết sản phẩm:</h3>
+            <ul>
+                <li th:each="item : ${cartItems}">
+                    <p>
+                        <strong>Sản phẩm:</strong> <span th:text="${item.product.name}"></span><br>
+                        <strong>Giá:</strong> <span th:text="${item.product.price}"></span> VNĐ<br>
+                        <strong>Số lượng:</strong> <span th:text="${item.quantity}"></span>
+                    </p>
+                </li>
+            </ul>
+        </div>
+
+        <div class="order-actions">
+            <a href="/" class="btn btn-primary">Quay về trang chủ</a>
+        </div>
+    </main>
+</div>
+
+<!-- Include footer fragment -->
+<div th:replace="component/footer :: footer"></div>
+
+</body>
+</html>

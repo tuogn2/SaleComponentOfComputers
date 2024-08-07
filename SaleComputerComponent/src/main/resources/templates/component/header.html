@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>My Application</title>
+    <link rel="stylesheet" th:href="@{/css/headerFooter.css}">
+    <link rel="stylesheet" th:href="@{/css/categories.css}">
+
+    <script th:src="@{/js/categories.js}"></script> <!-- Đường dẫn đến file JavaScript -->
+</head>
+<body>
+<header>
+    <div class="logo">
+      <a th:href="@{/}">
+          <h1>Logo</h1>
+      </a>
+    </div>
+    <nav>
+        <ul>
+            <li><a th:href="@{/}">Trang chủ</a></li>
+            <li class="dropdown">
+                <a href="#">Danh mục</a>
+                <ul class="categories-menu">
+                    <!-- Sử dụng Thymeleaf để lặp qua danh sách danh mục và hiển thị -->
+                    <li th:each="category : ${categories}">
+                        <a th:href="@{'/category?categoryid=' + ${category.id}}">
+                            <div th:text="${category.name}">Category Name</div>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li class="cart-shopping"><a th:href="@{/cart}">Giỏ hàng</a></li>
+        </ul>
+    </nav>
+    <div class="user-actions">
+        <!-- Kiểm tra xem có session người dùng hay không -->
+        <div th:if="${session.loggedInUser != null}">
+            <!-- Hiển thị tên người dùng và nút Đăng xuất -->
+            <span th:text="${session.loggedInUser.email}"></span>
+            <a th:href="@{/user/logout}"><button id="logout-btn">Đăng xuất</button></a>
+        </div>
+        <div th:unless="${session.loggedInUser != null}">
+            <!-- Hiển thị nút Đăng nhập và Đăng ký nếu không có session -->
+            <a th:href="@{/user/login}"><button id="btn">Đăng nhập</button></a>
+            <a th:href="@{/user/register}"><button id="register-btn">Đăng ký</button></a>
+        </div>
+    </div>
+
+</header>
+</body>
+</html>

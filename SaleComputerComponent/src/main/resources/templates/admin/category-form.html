@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Category List</title>
+    <link rel="stylesheet" th:href="@{/css/admin.css}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+</head>
+<body>
+<div th:replace="component/headerAdmin :: headerAdmin"></div>
+<div >
+    <div class="d-flex">
+        <div  th:replace="component/SitebarAdmin :: SitebarAdmin"></div>
+        <main class="col-md-9 ms-sm-auto col-lg-10 px-4">
+            <h1 class="my-4" th:text="${category.categoryid == 0} ? 'Thêm danh mục' : 'Sửa danh mục'"></h1>
+
+            <!-- Form thêm danh mục -->
+            <div th:if="${category.categoryid == 0}">
+                <form th:action="@{/admin/category/add}" th:object="${category}" method="post">
+                    <div class="mb-3">
+                        <label for="name-add" class="form-label">Tên danh mục:</label>
+                        <input type="text" id="name-add" class="form-control" th:field="*{name}" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="description-add" class="form-label">Mô tả:</label>
+                        <input type="text" id="description-add" class="form-control" th:field="*{description}" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Lưu</button>
+                    <a href="/admin/categories" class="btn btn-secondary">Hủy</a>
+                </form>
+            </div>
+
+            <!-- Form sửa danh mục -->
+            <div th:if="${category.categoryid != 0}">
+                <form th:action="@{/admin/category/edit}" th:object="${category}" method="post">
+                    <div class="mb-3">
+                        <label for="name-edit" class="form-label">Tên danh mục:</label>
+                        <input type="text" id="name-edit" class="form-control" th:field="*{name}" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="description-edit" class="form-label">Mô tả:</label>
+                        <input type="text" id="description-edit" class="form-control" th:field="*{description}" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Lưu</button>
+                    <a href="/admin/category" class="btn btn-secondary">Hủy</a>
+                </form>
+            </div>
+        </main>
+    </div>
+
+</div>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
